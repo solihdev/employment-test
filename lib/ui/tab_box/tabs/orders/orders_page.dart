@@ -1,20 +1,15 @@
 import 'package:employment_test/utils/images.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class OrdersPage extends StatelessWidget {
+  const OrdersPage({Key? key}) : super(key: key);
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Zakazlar",
+          "Zakaz olish",
           style: TextStyle(color: Colors.green),
         ),
         backgroundColor: Colors.white,
@@ -34,20 +29,21 @@ class _HomePageState extends State<HomePage> {
           height: MediaQuery.of(context).size.height,
           child: ListView.builder(
             shrinkWrap: true,
-            itemCount: 1,
+            itemCount: 100,
             itemBuilder: (BuildContext context, int index) {
               return ListTile(
                 leading: Container(
                   width: 50,
                   height: 50,
                   decoration: const BoxDecoration(
-                    image: DecorationImage(image:     AssetImage(AppImages.personImage),fit: BoxFit.fill),
+                    image: DecorationImage(image: AssetImage(AppImages.personImage),fit: BoxFit.fill),
                     color: Colors.white,
                     shape: BoxShape.circle,
                   ),
                 ),
-                trailing: Text("75000 So'm"),
-                title: Text("Zakaz ${index+1}",style: const TextStyle(fontSize: 18),),
+                trailing: IconButton(onPressed: (){}, icon: const Icon(Icons.edit)),
+                title: Text("Doniyor Turg'unboyev   ${index+1}",style: const TextStyle(fontSize: 18),),
+                subtitle: const Text("998 (90) 789 80 69"),
               );
             },
           ),

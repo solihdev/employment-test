@@ -1,4 +1,6 @@
 import 'package:employment_test/cubits/tab/tab_cubit.dart';
+import 'package:employment_test/ui/tab_box/tabs/orders/orders_page.dart';
+import 'package:employment_test/ui/tab_box/tabs/sales/sales_page.dart';
 import 'package:employment_test/ui/widgets/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,7 +22,8 @@ class _TabBoxPageState extends State<TabBoxPage> {
   void initState() {
     screens.add(const HomePage());
     screens.add(const SizedBox());
-    screens.add(const SizedBox());
+    screens.add(const OrdersPage());
+    screens.add(const SalesPage());
     screens.add(const SizedBox());
     super.initState();
   }
