@@ -1,5 +1,8 @@
+import 'package:employment_test/bloc/order/orders_bloc.dart';
+import 'package:employment_test/data/models/form_status.dart';
 import 'package:employment_test/utils/images.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,47 +15,71 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Zakazlar",
-          style: TextStyle(color: Colors.green),
+        appBar: AppBar(
+          title: const Text(
+            "Zakazlar",
+            style: TextStyle(color: Colors.green),
+          ),
+          backgroundColor: Colors.white,
+          iconTheme: const IconThemeData(color: Colors.black),
+          elevation: 0,
+          leading: IconButton(onPressed: () {}, icon: const Icon(Icons.list)),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.refresh),
+            )
+          ],
         ),
-        backgroundColor: Colors.white,
-        iconTheme: const IconThemeData(color: Colors.black),
-        elevation: 0,
-        leading: IconButton(onPressed: () {}, icon: const Icon(Icons.list)),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.refresh),
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: 1,
-            itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                leading: Container(
-                  width: 50,
-                  height: 50,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(image:     AssetImage(AppImages.personImage),fit: BoxFit.fill),
-                    color: Colors.white,
-                    shape: BoxShape.circle,
+        body: BlocBuilder<OrdersBloc, OrdersState>(
+          builder: (context, state) {
+            if (state.status == FormStatus.gettingOrdersLoad) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            else if (state.status == FormStatus.gettingOrdersSuccess) {
+              return SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: state.orders.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        leading: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(AppImages.personImage),
+                                fit: BoxFit.fill),
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        trailing: const Text("75000 So'm"),
+                        title: Text(
+                          "Zakaz ${index + 1}",
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      );
+                    },
                   ),
                 ),
-                trailing: Text("75000 So'm"),
-                title: Text("Zakaz ${index+1}",style: const TextStyle(fontSize: 18),),
               );
-            },
-          ),
-        ),
-      ),
-    );
+            }
+            else if (state.status == FormStatus.gettingOrdersFail) {
+              return Center(
+                child: Text(state.error),
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ));
   }
 }
