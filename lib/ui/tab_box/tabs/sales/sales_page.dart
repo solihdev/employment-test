@@ -90,7 +90,7 @@ class SalesPage extends StatelessWidget {
                           "Colgate ${index + 1}-gr",
                           style: const TextStyle(fontSize: 18),
                         ),
-                        subtitle: Text(" 75000 So'm"),
+                        subtitle: const Text(" 75000 So'm"),
                       ),
                       const Divider(
                         thickness: 1,
@@ -100,6 +100,7 @@ class SalesPage extends StatelessWidget {
                 },
               ),
             ),
+            TextButton(child: const Text("Buyurtma berish"),onPressed: (){},)
           ],
         ),
       ),
