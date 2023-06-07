@@ -20,10 +20,7 @@ class _TabBoxPageState extends State<TabBoxPage> {
   @override
   void initState() {
     screens.add(const HomePage());
-    screens.add(const SizedBox());
     screens.add(const UsersPage());
-    screens.add(const SizedBox());
-    screens.add(const SizedBox());
     super.initState();
   }
 

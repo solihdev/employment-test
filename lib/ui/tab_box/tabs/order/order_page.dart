@@ -1,6 +1,9 @@
+import 'package:employment_test/bloc/order/orders_bloc.dart';
 import 'package:employment_test/bloc/products/products_bloc.dart';
 import 'package:employment_test/data/models/form_status.dart';
+import 'package:employment_test/data/models/order_model.dart';
 import 'package:employment_test/data/models/user_model.dart';
+import 'package:employment_test/ui/tab_box/tab_box.dart';
 import 'package:employment_test/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -133,8 +136,33 @@ class OrderPage extends StatelessWidget {
                   TextButton(
                     child: const Text("Buyurtma berish"),
                     onPressed: () {
-                      print(controllers[1].text);
+                      for (var i = 0; i < controllers.length; i++) {
+                        if (controllers[i].text.isNotEmpty) {
+                          totalPrice += int.parse(controllers[i].text) *
+                              state.products[i].price;
+                        }
+                      }
+                      print(totalPrice.toString());
+                      OrderModel newOrder = OrderModel(
+                        count: 0,
+                        totalPrice: totalPrice,
+                        orderName: userModel.name,
+                      );
+
+                      final ordersBloc = BlocProvider.of<OrdersBloc>(context);
+                      ordersBloc.add(AddOrders(orderModel: newOrder));
                     },
+                  ),
+                  BlocListener<OrdersBloc, OrdersState>(
+                    listener: (context, state) {
+                      if (state.status == FormStatus.insertingOrdersSuccess) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => TabBoxPage()),
+                        );
+                      }
+                    },
+                    child: Container(), // Empty Container
                   )
                 ],
               ),

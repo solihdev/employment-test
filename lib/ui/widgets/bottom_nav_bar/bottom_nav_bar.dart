@@ -23,26 +23,8 @@ class BottomNavBar extends StatelessWidget {
           label: '',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.call_missed_sharp,
-            color: index == 1 ? Colors.green : Colors.grey.shade400,
-          ),
-          label: '',
-        ),
-        BottomNavigationBarItem(
           icon: Icon(Icons.shopping_bag_outlined,
-            color: index == 2 ? Colors.green : Colors.grey.shade400,
-          ),
-          label: '',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.list,
-            color: index == 3 ? Colors.green : Colors.grey.shade400,
-          ),
-          label: '',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person,
-            color: index == 4 ? Colors.green : Colors.grey.shade400,
+            color: index == 1 ? Colors.green : Colors.grey.shade400,
           ),
           label: '',
         ),
