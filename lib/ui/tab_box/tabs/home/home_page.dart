@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                           shape: BoxShape.circle,
                         ),
                       ),
-                      trailing: Text(state.orders[index].totalPrice.toString()),
+                      trailing: Text("${state.orders[index].totalPrice} So'm"),
                       title: Text(
                         state.orders[index].orderName,
                         style: const TextStyle(fontSize: 18),
