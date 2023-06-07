@@ -5,6 +5,7 @@ import 'package:employment_test/data/models/order_model.dart';
 import 'package:employment_test/data/models/user_model.dart';
 import 'package:employment_test/ui/tab_box/tab_box.dart';
 import 'package:employment_test/utils/images.dart';
+import 'package:employment_test/utils/my_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -149,7 +150,9 @@ class OrderPage extends StatelessWidget {
                       );
 
                       final ordersBloc = BlocProvider.of<OrdersBloc>(context);
-                      ordersBloc.add(AddOrders(orderModel: newOrder));
+                      totalPrice != 0
+                          ? ordersBloc.add(AddOrders(orderModel: newOrder))
+                          : MyUtils.getMyToast(message: 'Qiymat kiriting');
                     },
                   ),
                   BlocListener<OrdersBloc, OrdersState>(
