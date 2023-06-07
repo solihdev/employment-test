@@ -142,7 +142,6 @@ class OrderPage extends StatelessWidget {
                               state.products[i].price;
                         }
                       }
-                      print(totalPrice.toString());
                       OrderModel newOrder = OrderModel(
                         count: 0,
                         totalPrice: totalPrice,
@@ -156,9 +155,12 @@ class OrderPage extends StatelessWidget {
                   BlocListener<OrdersBloc, OrdersState>(
                     listener: (context, state) {
                       if (state.status == FormStatus.insertingOrdersSuccess) {
+                        BlocProvider.of<OrdersBloc>(context).add(FetchOrders());
+
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => TabBoxPage()),
+                          MaterialPageRoute(
+                              builder: (context) => const TabBoxPage()),
                         );
                       }
                     },
